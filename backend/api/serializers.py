@@ -16,7 +16,7 @@ class SellerRegisterSerializer(serializers.ModelSerializer):
         if data["password"] != data["password_repeat"]:
             raise serializers.ValidationError("Passwords do not match")
 
-            validate_password(data["password"])
+        validate_password(data["password"])
 
         return data
 
