@@ -33,3 +33,6 @@ format:
 check:
 	ruff check .
 	black --check .
+
+test:
+	python manage.py test
