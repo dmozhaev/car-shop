@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import check_password, make_password
 from django.db import models
 
 
@@ -11,19 +12,23 @@ class Make(models.Model):
 
 # Seller
 class Seller(models.Model):
-    name = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
-    login = models.CharField(max_length=100, unique=True)
+    password = models.CharField(max_length=128, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
+
     def __str__(self):
-        return self.name
+        return self.email
 
 
 # Buyer
 class Buyer(models.Model):
     name = models.CharField(max_length=200)
-    email = models.EmailField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
