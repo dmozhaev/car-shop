@@ -1,2 +1,2 @@
 # car-shop
-Online shop for selling used cars
+Online shop for selling used cars.
