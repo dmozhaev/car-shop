@@ -1,3 +1,4 @@
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from .models import Seller
@@ -14,6 +15,9 @@ class SellerRegisterSerializer(serializers.ModelSerializer):
     def validate(self, data):
         if data["password"] != data["password_repeat"]:
             raise serializers.ValidationError("Passwords do not match")
+
+            validate_password(data["password"])
+
         return data
 
     def create(self, validated_data):
