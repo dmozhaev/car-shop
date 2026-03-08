@@ -1,11 +1,13 @@
 from django.db import models
 
+
 # Make / Manufacturer
 class Make(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
+
 
 # Seller
 class Seller(models.Model):
@@ -17,6 +19,7 @@ class Seller(models.Model):
     def __str__(self):
         return self.name
 
+
 # Buyer
 class Buyer(models.Model):
     name = models.CharField(max_length=200)
@@ -26,11 +29,12 @@ class Buyer(models.Model):
     def __str__(self):
         return self.name
 
+
 # Car
 class Car(models.Model):
     STATUS_CHOICES = [
-        ('available', 'Available'),
-        ('sold', 'Sold'),
+        ("available", "Available"),
+        ("sold", "Sold"),
     ]
 
     year = models.PositiveIntegerField()
@@ -45,7 +49,7 @@ class Car(models.Model):
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     buyer = models.ForeignKey(Buyer, on_delete=models.SET_NULL, null=True, blank=True)
 
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='available')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="available")
     created_at = models.DateTimeField(auto_now_add=True)
     sold_at = models.DateTimeField(null=True, blank=True)
 

@@ -8,53 +8,93 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Buyer',
+            name="Buyer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('email', models.EmailField(blank=True, max_length=254, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("email", models.EmailField(blank=True, max_length=254, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Make',
+            name="Make",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Seller',
+            name="Seller",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('login', models.CharField(max_length=100, unique=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("login", models.CharField(max_length=100, unique=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Car',
+            name="Car",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('year', models.PositiveIntegerField()),
-                ('mileage', models.PositiveIntegerField(blank=True, null=True)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('fuel_type', models.CharField(blank=True, max_length=50)),
-                ('transmission', models.CharField(blank=True, max_length=50)),
-                ('color', models.CharField(blank=True, max_length=50)),
-                ('description', models.TextField(blank=True)),
-                ('status', models.CharField(choices=[('available', 'Available'), ('sold', 'Sold')], default='available', max_length=10)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('sold_at', models.DateTimeField(blank=True, null=True)),
-                ('buyer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='api.buyer')),
-                ('make', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.make')),
-                ('seller', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.seller')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("year", models.PositiveIntegerField()),
+                ("mileage", models.PositiveIntegerField(blank=True, null=True)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("fuel_type", models.CharField(blank=True, max_length=50)),
+                ("transmission", models.CharField(blank=True, max_length=50)),
+                ("color", models.CharField(blank=True, max_length=50)),
+                ("description", models.TextField(blank=True)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[("available", "Available"), ("sold", "Sold")],
+                        default="available",
+                        max_length=10,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("sold_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "buyer",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="api.buyer",
+                    ),
+                ),
+                (
+                    "make",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api.make"),
+                ),
+                (
+                    "seller",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api.seller"),
+                ),
             ],
         ),
     ]
