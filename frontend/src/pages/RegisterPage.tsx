@@ -74,6 +74,7 @@ export default function RegisterPage() {
             {...register('email')}
             error={!!errors.email}
             helperText={errors.email?.message}
+            inputProps={{ 'data-testid': 'registration-email-input' }}
           />
 
           <TextField
@@ -84,6 +85,7 @@ export default function RegisterPage() {
             {...register('password')}
             error={!!errors.password}
             helperText={errors.password?.message}
+            inputProps={{ 'data-testid': 'registration-password-input' }}
           />
 
           <TextField
@@ -94,6 +96,7 @@ export default function RegisterPage() {
             {...register('password_repeat')}
             error={!!errors.password_repeat}
             helperText={errors.password_repeat?.message}
+            inputProps={{ 'data-testid': 'registration-password-repeat-input' }}
           />
 
           <Button
@@ -102,6 +105,7 @@ export default function RegisterPage() {
             fullWidth
             sx={{ mt: 3 }}
             disabled={isSubmitting}
+            data-testid="registration-submit-button"
           >
             Register
           </Button>
