@@ -7,15 +7,14 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
 import { type CarFormData } from '../schemas/carSchemas'
+import { useSnackbar } from '../components/useSnackbar'
 
 export default function CarDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { showSnackbar, SnackbarComponent } = useSnackbar()
 
-  const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [car, setCar] = useState<CarFormData>()
   const [name, setName] = useState('')
 
@@ -29,13 +28,15 @@ export default function CarDetailPage() {
   }, [id])
 
   const handleBuy = async () => {
-    await buyCar(Number(id), name)
+    try {
+      await buyCar(Number(id), name)
 
-    setSnackbarOpen(true)
+      showSnackbar('Car purchased successfully', 'success')
 
-    setTimeout(() => {
-      navigate('/')
-    }, 1500)
+      setTimeout(() => navigate('/'), 800)
+    } catch {
+      showSnackbar('Failed to purchase a car', 'error')
+    }
   }
 
   if (!car) return null
@@ -65,11 +66,7 @@ export default function CarDetailPage() {
         Buy
       </Button>
 
-      <Snackbar open={snackbarOpen} autoHideDuration={1500} onClose={() => setSnackbarOpen(false)}>
-        <Alert severity="success" sx={{ width: '100%' }}>
-          Car purchased successfully
-        </Alert>
-      </Snackbar>
+      {SnackbarComponent}
     </Container>
   )
 }
