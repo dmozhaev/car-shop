@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import { Link } from 'react-router-dom'
 
 export default function HomePage() {
   const [cars, setCars] = useState<Car[]>([])
@@ -23,7 +25,7 @@ export default function HomePage() {
   return (
     <Container sx={{ mt: 4 }}>
       <Grid container spacing={3}>
-        {cars.map((car) => (
+        {cars.map((car, index) => (
           <Grid item xs={12} md={4} key={car.id}>
             <Card>
               <CardContent>
@@ -40,6 +42,14 @@ export default function HomePage() {
                 {car.transmission && <Typography>Transmission: {car.transmission}</Typography>}
 
                 {car.color && <Typography>Color: {car.color}</Typography>}
+
+                <Button
+                  component={Link}
+                  to={`/cars/${car.id}`}
+                  data-testid={`view-car-button-${index}`}
+                >
+                  View
+                </Button>
               </CardContent>
             </Card>
           </Grid>

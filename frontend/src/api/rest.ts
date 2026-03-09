@@ -60,3 +60,11 @@ export const getMakes = () => {
 export const getCars = () => {
   return apiGet('/carlist/')
 }
+
+export const getCar = (id: number) => {
+  return apiGet(`/cars/${id}/`)
+}
+
+export const buyCar = (id: number, name: string) => {
+  return apiPost(`/cars/${id}/buy/`, { name })
+}
