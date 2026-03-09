@@ -1,9 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
-
-function LoginPage() {
-  return <div>Login page coming soon</div>
-}
 
 export default function AppRouter() {
   return (
