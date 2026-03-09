@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('user can login', async ({ page }) => {
+test('user can logout', async ({ page }) => {
 
   await page.goto('/login')
 
@@ -9,6 +9,8 @@ test('user can login', async ({ page }) => {
 
   await page.getByTestId('login-submit-button').click()
 
-  await expect(page.getByText('Login successful')).toBeVisible()
+  await page.getByTestId('navbar-logout-button').click()
+
+  await expect(page.getByTestId('navbar-login-button')).toBeVisible()
   await expect(page).toHaveURL('/')
 })

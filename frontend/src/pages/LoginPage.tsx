@@ -2,6 +2,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { loginSchema } from '../schemas/authSchemas'
 import type { LoginFormData } from '../schemas/authSchemas'
+import { useAuth } from '../auth/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from '../components/useSnackbar'
 
 import { loginSeller } from '../api/rest'
 
@@ -19,13 +22,23 @@ export default function LoginPage() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   })
+  const { login } = useAuth()
+  const navigate = useNavigate()
+  const { showSnackbar, SnackbarComponent } = useSnackbar()
 
   const onSubmit = async (data: LoginFormData) => {
-    const result = await loginSeller(data)
+    try {
+      const result = await loginSeller(data)
 
-    localStorage.setItem('accessToken', result.access)
+      login(result.access)
 
-    alert('Login successful')
+      showSnackbar('Login successful', 'success')
+
+      setTimeout(() => navigate('/'), 500)
+    } catch (err: unknown) {
+      console.log(err)
+      showSnackbar('Invalid email or password', 'error')
+    }
   }
 
   return (
@@ -41,6 +54,7 @@ export default function LoginPage() {
             {...register('email')}
             error={!!errors.email}
             helperText={errors.email?.message}
+            inputProps={{ 'data-testid': 'login-email-input' }}
           />
 
           <TextField
@@ -51,13 +65,22 @@ export default function LoginPage() {
             {...register('password')}
             error={!!errors.password}
             helperText={errors.password?.message}
+            inputProps={{ 'data-testid': 'login-password-input' }}
           />
 
-          <Button variant="contained" fullWidth type="submit" sx={{ mt: 3 }}>
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            sx={{ mt: 3 }}
+            data-testid="login-submit-button"
+          >
             Login
           </Button>
         </form>
       </Paper>
+
+      {SnackbarComponent}
     </Container>
   )
 }
