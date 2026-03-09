@@ -1,7 +1,9 @@
+import { getToken } from '../auth/authStorage'
+
 const API_BASE = '/api'
 
 export async function apiPost(url: string, body: unknown) {
-  const token = localStorage.getItem('accessToken')
+  const token = getToken()
 
   const response = await fetch(`http://localhost:8000${API_BASE}${url}`, {
     method: 'POST',

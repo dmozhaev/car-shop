@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 
 import { Link } from 'react-router-dom'
-import { useAuth } from '../auth/AuthContext'
+import { useAuth } from '../auth/useAuth'
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -19,7 +19,9 @@ export default function Navbar() {
   return (
     <AppBar position="fixed" sx={{ width: '100%' }}>
       <Toolbar>
-        <Typography sx={{ flexGrow: 1 }}>Car Shop</Typography>
+        <Typography variant="h6" sx={{ flexGrow: 1, color: 'white' }} component={Link} to="/">
+          Car Shop
+        </Typography>
 
         {!isAuthenticated && (
           <>
