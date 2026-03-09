@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const carSchema = z.object({
   year: z.number().min(1900),
   mileage: z.number().optional(),
-  price: z.number(),
+  price: z.number().positive(),
   make: z.number(),
   fuel_type: z.string().optional(),
   transmission: z.string().optional(),

@@ -14,10 +14,25 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import InputLabel from '@mui/material/InputLabel'
+import FormControl from '@mui/material/FormControl'
+import { useEffect, useState } from 'react'
+import { getMakes } from '../api/rest'
 
 export default function CreateCarPage() {
   const navigate = useNavigate()
   const { showSnackbar, SnackbarComponent } = useSnackbar()
+  const [makes, setMakes] = useState<{ id: number; name: string }[]>([])
+
+  useEffect(() => {
+    const loadMakes = async () => {
+      const data = await getMakes()
+      setMakes(data)
+    }
+    loadMakes()
+  }, [])
 
   const { register, handleSubmit } = useForm<CarFormData>({
     resolver: zodResolver(carSchema),
@@ -59,13 +74,67 @@ export default function CreateCarPage() {
             inputProps={{ 'data-testid': 'create-car-price-input' }}
           />
 
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Make</InputLabel>
+            <Select
+              label="Make"
+              defaultValue=""
+              {...register('make', { valueAsNumber: true })}
+              data-testid="create-car-make-select"
+            >
+              {makes.map((make) => (
+                <MenuItem
+                  key={make.id}
+                  value={make.id}
+                  data-testid={`create-car-make-option-${make.id}`}
+                >
+                  {make.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           <TextField
-            label="Make ID"
+            label="Mileage"
             type="number"
             fullWidth
             margin="normal"
-            {...register('make', { valueAsNumber: true })}
-            inputProps={{ 'data-testid': 'create-car-make-input' }}
+            {...register('mileage', { valueAsNumber: true })}
+            inputProps={{ 'data-testid': 'create-car-mileage-input' }}
+          />
+
+          <TextField
+            label="Fuel Type"
+            fullWidth
+            margin="normal"
+            {...register('fuel_type')}
+            inputProps={{ 'data-testid': 'create-car-fuel-type-input' }}
+          />
+
+          <TextField
+            label="Transmission"
+            fullWidth
+            margin="normal"
+            {...register('transmission')}
+            inputProps={{ 'data-testid': 'create-car-transmission-input' }}
+          />
+
+          <TextField
+            label="Color"
+            fullWidth
+            margin="normal"
+            {...register('color')}
+            inputProps={{ 'data-testid': 'create-car-color-input' }}
+          />
+
+          <TextField
+            label="Description"
+            multiline
+            rows={4}
+            fullWidth
+            margin="normal"
+            {...register('description')}
+            inputProps={{ 'data-testid': 'create-car-description-input' }}
           />
 
           <Button

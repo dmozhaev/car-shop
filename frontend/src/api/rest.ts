@@ -4,6 +4,24 @@ import { type LoginFormData, type RegisterFormData } from '../schemas/authSchema
 
 const API_BASE = '/api'
 
+export async function apiGet(url: string) {
+  const token = getToken()
+
+  const response = await fetch(`http://localhost:8000${API_BASE}${url}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+  })
+
+  const data = await response.json()
+
+  if (!response.ok) throw data
+
+  return data
+}
+
 export async function apiPost(url: string, body: unknown) {
   const token = getToken()
 
@@ -33,4 +51,8 @@ export const loginSeller = (payload: LoginFormData) => {
 
 export const createCar = (payload: CarFormData) => {
   return apiPost('/cars/', payload)
+}
+
+export const getMakes = () => {
+  return apiGet('/makes/')
 }

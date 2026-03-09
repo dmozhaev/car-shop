@@ -13,7 +13,9 @@ test("seller can create car", async ({ page }) => {
 
   await page.getByTestId("create-car-year-input").fill("2022")
   await page.getByTestId("create-car-price-input").fill("20000")
-  await page.getByTestId("create-car-make-input").fill("1")
+  await page.getByTestId("create-car-make-select").click()
+  await page.getByRole("option", { name: "Toyota" }).click()
+  await page.getByTestId("create-car-mileage-input").fill("12345")
 
   await page.getByTestId('create-car-submit-button').click()
 
