@@ -6,6 +6,7 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
@@ -29,20 +30,14 @@ export default function HomePage() {
           <Grid item xs={12} md={4} key={car.id}>
             <Card>
               <CardContent>
-                <Typography variant="h6">
-                  {car.make} {car.year}
-                </Typography>
+                <Typography variant="h6">{car.price} EUR</Typography>
 
-                <Typography>Price: ${car.price}</Typography>
+                <Typography>Year: {car.year}</Typography>
 
-                {car.mileage && <Typography>Mileage: {car.mileage} km</Typography>}
+                <Typography>Seller: {car.seller}</Typography>
+              </CardContent>
 
-                {car.fuel_type && <Typography>Fuel: {car.fuel_type}</Typography>}
-
-                {car.transmission && <Typography>Transmission: {car.transmission}</Typography>}
-
-                {car.color && <Typography>Color: {car.color}</Typography>}
-
+              <CardActions>
                 <Button
                   component={Link}
                   to={`/cars/${car.id}`}
@@ -50,7 +45,7 @@ export default function HomePage() {
                 >
                   View
                 </Button>
-              </CardContent>
+              </CardActions>
             </Card>
           </Grid>
         ))}
