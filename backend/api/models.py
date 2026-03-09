@@ -1,4 +1,5 @@
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
 
@@ -11,8 +12,12 @@ class Make(models.Model):
 
 
 # Seller
-class Seller(models.Model):
+class Seller(AbstractBaseUser, PermissionsMixin):
+
     email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = "email"
+
     password = models.CharField(max_length=128, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
 

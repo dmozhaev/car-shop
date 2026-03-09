@@ -1,4 +1,6 @@
 import { getToken } from '../auth/authStorage'
+import { type CarFormData } from '../schemas/carSchemas'
+import { type LoginFormData, type RegisterFormData } from '../schemas/authSchemas'
 
 const API_BASE = '/api'
 
@@ -21,14 +23,14 @@ export async function apiPost(url: string, body: unknown) {
   return data
 }
 
-export const registerSeller = (payload: {
-  email: string
-  password: string
-  password_repeat: string
-}) => {
+export const registerSeller = (payload: RegisterFormData) => {
   return apiPost('/register/', payload)
 }
 
-export const loginSeller = (payload: { email: string; password: string }) => {
+export const loginSeller = (payload: LoginFormData) => {
   return apiPost('/login/', payload)
+}
+
+export const createCar = (payload: CarFormData) => {
+  return apiPost('/cars/', payload)
 }

@@ -41,9 +41,20 @@ export default function Navbar() {
         )}
 
         {isAuthenticated && (
-          <Button color="inherit" onClick={handleLogout} data-testid="navbar-logout-button">
-            Logout
-          </Button>
+          <>
+            <Button
+              color="inherit"
+              component={Link}
+              to="/cars/create"
+              data-testid="navbar-create-car-button"
+            >
+              Add Car
+            </Button>
+
+            <Button color="inherit" onClick={handleLogout} data-testid="navbar-logout-button">
+              Logout
+            </Button>
+          </>
         )}
       </Toolbar>
     </AppBar>
