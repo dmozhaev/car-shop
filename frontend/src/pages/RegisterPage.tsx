@@ -1,9 +1,16 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { registerSchema } from '../schemas/authSchemas'
 import type { RegisterFormData } from '../schemas/authSchemas'
+import { registerSchema } from '../schemas/authSchemas'
 import { registerSeller } from '../api/rest'
+
+import Container from '@mui/material/Container'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 
 export default function RegisterPage() {
   const {
@@ -25,25 +32,53 @@ export default function RegisterPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h1>Register</h1>
+    <Container maxWidth="sm">
+      <Paper sx={{ mt: 6, p: 4, mx: 'auto' }}>
+        <Typography variant="h4" gutterBottom>
+          Register
+        </Typography>
 
-      <div>
-        <input {...register('email')} placeholder="Email" />
-        {errors.email && <p>{errors.email.message}</p>}
-      </div>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            label="Email"
+            fullWidth
+            margin="normal"
+            {...register('email')}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
 
-      <div>
-        <input type="password" {...register('password')} placeholder="Password" />
-        {errors.password && <p>{errors.password.message}</p>}
-      </div>
+          <TextField
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            {...register('password')}
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
 
-      <div>
-        <input type="password" {...register('password_repeat')} placeholder="Repeat Password" />
-        {errors.password_repeat && <p>{errors.password_repeat.message}</p>}
-      </div>
+          <TextField
+            label="Repeat Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            {...register('password_repeat')}
+            error={!!errors.password_repeat}
+            helperText={errors.password_repeat?.message}
+          />
 
-      <button disabled={isSubmitting}>Register</button>
-    </form>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 3 }}
+            disabled={isSubmitting}
+          >
+            Register
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   )
 }
