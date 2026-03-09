@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -11,11 +12,17 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
 
 export default function RegisterPage() {
+  const [successOpen, setSuccessOpen] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -24,16 +31,37 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await registerSeller(data)
-      alert('Registration successful')
-    } catch (err) {
+
+      setSuccessOpen(true)
+      setErrorMessage(null)
+    } catch (err: unknown) {
       console.error(err)
-      alert('Registration failed')
+
+      if (err.email) {
+        setError('email', {
+          type: 'server',
+          message: err.email[0],
+        })
+      }
+
+      if (err.password) {
+        setError('password', {
+          type: 'server',
+          message: err.password[0],
+        })
+      }
+
+      if (err.non_field_errors) {
+        setErrorMessage(err.non_field_errors[0])
+      } else if (typeof err === 'object') {
+        setErrorMessage('Registration failed')
+      }
     }
   }
 
   return (
     <Container maxWidth="sm">
-      <Paper sx={{ mt: 6, p: 4, mx: 'auto' }}>
+      <Paper sx={{ mt: 6, p: 4 }}>
         <Typography variant="h4" gutterBottom>
           Register
         </Typography>
@@ -79,6 +107,18 @@ export default function RegisterPage() {
           </Button>
         </Box>
       </Paper>
+
+      <Snackbar open={successOpen} autoHideDuration={4000} onClose={() => setSuccessOpen(false)}>
+        <Alert severity="success" variant="filled">
+          Registration successful!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={!!errorMessage} autoHideDuration={4000} onClose={() => setErrorMessage(null)}>
+        <Alert severity="error" variant="filled">
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   )
 }
