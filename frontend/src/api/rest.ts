@@ -56,3 +56,7 @@ export const createCar = (payload: CarFormData) => {
 export const getMakes = () => {
   return apiGet('/makes/')
 }
+
+export const getCars = () => {
+  return apiGet('/carlist/')
+}
