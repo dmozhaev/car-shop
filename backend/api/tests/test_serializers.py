@@ -34,6 +34,18 @@ class SellerRegisterSerializerTest(TestCase):
         self.assertFalse(serializer.is_valid())
         self.assertIn("password_repeat", serializer.errors)
 
+    def test_serializer_password_too_common(self):
+        data = {
+            "email": "seller@test.com",
+            "password": "asdasdasd",
+            "password_repeat": "asdasdasd",
+        }
+
+        serializer = SellerRegisterSerializer(data=data)
+
+        self.assertFalse(serializer.is_valid())
+        self.assertIn("non_field_errors", serializer.errors)
+
     def test_serializer_requires_email(self):
         data = {
             "password": "StrongPass123!",
