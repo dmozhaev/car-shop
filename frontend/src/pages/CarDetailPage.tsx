@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { type CarFormData } from '../schemas/carSchemas'
-import { useSnackbar } from '../components/useSnackbar'
+import { useSnackbar } from '../hooks/useSnackbar'
 
 export default function CarDetailPage() {
   const { id } = useParams()
@@ -33,7 +33,7 @@ export default function CarDetailPage() {
 
       showSnackbar('Car purchased successfully', 'success')
 
-      setTimeout(() => navigate('/'), 800)
+      setTimeout(() => navigate('/'), 500)
     } catch {
       showSnackbar('Failed to purchase a car', 'error')
     }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getCars } from '../api/rest'
-import { type Car } from '../types/car'
+import { type CarListItem } from '../types/carListItem'
 
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
@@ -12,7 +12,7 @@ import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
 
 export default function HomePage() {
-  const [cars, setCars] = useState<Car[]>([])
+  const [cars, setCars] = useState<CarListItem[]>([])
 
   useEffect(() => {
     const loadCars = async () => {

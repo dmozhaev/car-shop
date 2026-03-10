@@ -4,7 +4,7 @@ import { loginSchema } from '../schemas/authSchemas'
 import type { LoginFormData } from '../schemas/authSchemas'
 import { useAuth } from '../auth/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { useSnackbar } from '../components/useSnackbar'
+import { useSnackbar } from '../hooks/useSnackbar'
 
 import { loginSeller } from '../api/rest'
 

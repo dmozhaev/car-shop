@@ -6,7 +6,7 @@ import type { CarFormData } from '../schemas/carSchemas'
 
 import { createCar } from '../api/rest'
 
-import { useSnackbar } from '../components/useSnackbar'
+import { useSnackbar } from '../hooks/useSnackbar'
 import { useNavigate } from 'react-router-dom'
 
 import Container from '@mui/material/Container'
@@ -44,7 +44,7 @@ export default function CreateCarPage() {
 
       showSnackbar('Car created successfully', 'success')
 
-      setTimeout(() => navigate('/'), 800)
+      setTimeout(() => navigate('/'), 500)
     } catch {
       showSnackbar('Failed to create car', 'error')
     }

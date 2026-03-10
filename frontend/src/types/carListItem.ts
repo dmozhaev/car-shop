@@ -1,4 +1,4 @@
-export type Car = {
+export type CarListItem = {
   id: number
   year: number
   price: string

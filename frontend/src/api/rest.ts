@@ -2,12 +2,13 @@ import { getToken } from '../auth/authStorage'
 import { type CarFormData } from '../schemas/carSchemas'
 import { type LoginFormData, type RegisterFormData } from '../schemas/authSchemas'
 
+const BACKEND_URL = 'http://localhost:8000'
 const API_BASE = '/api'
 
 export async function apiGet(url: string) {
   const token = getToken()
 
-  const response = await fetch(`http://localhost:8000${API_BASE}${url}`, {
+  const response = await fetch(`${BACKEND_URL}${API_BASE}${url}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ export async function apiGet(url: string) {
 export async function apiPost(url: string, body: unknown) {
   const token = getToken()
 
-  const response = await fetch(`http://localhost:8000${API_BASE}${url}`, {
+  const response = await fetch(`${BACKEND_URL}${API_BASE}${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

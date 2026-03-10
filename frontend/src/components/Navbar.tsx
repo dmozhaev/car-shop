@@ -23,24 +23,7 @@ export default function Navbar() {
           Car Shop
         </Typography>
 
-        {!isAuthenticated && (
-          <>
-            <Button color="inherit" component={Link} to="/login" data-testid="navbar-login-button">
-              Login
-            </Button>
-
-            <Button
-              color="inherit"
-              component={Link}
-              to="/register"
-              data-testid="navbar-register-button"
-            >
-              Register
-            </Button>
-          </>
-        )}
-
-        {isAuthenticated && (
+        {isAuthenticated ? (
           <>
             <Button
               color="inherit"
@@ -53,6 +36,21 @@ export default function Navbar() {
 
             <Button color="inherit" onClick={handleLogout} data-testid="navbar-logout-button">
               Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button color="inherit" component={Link} to="/login" data-testid="navbar-login-button">
+              Login
+            </Button>
+
+            <Button
+              color="inherit"
+              component={Link}
+              to="/register"
+              data-testid="navbar-register-button"
+            >
+              Register
             </Button>
           </>
         )}
