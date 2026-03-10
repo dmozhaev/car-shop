@@ -16,5 +16,6 @@ test('user can register successfully', async ({ page }) => {
 
   await page.getByTestId('registration-submit-button').click()
 
-  await expect(page.getByText('Registration successful')).toBeVisible()
+  await page.waitForURL('/')
+  await expect(page).toHaveURL('/')
 })

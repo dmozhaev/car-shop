@@ -8,6 +8,7 @@ test('user can logout', async ({ page }) => {
   await page.getByTestId('login-password-input').fill('StrongPass123!')
 
   await page.getByTestId('login-submit-button').click()
+  await page.waitForURL('/')
 
   await page.getByTestId('navbar-logout-button').click()
 

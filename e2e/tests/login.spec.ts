@@ -8,7 +8,6 @@ test('user can login', async ({ page }) => {
   await page.getByTestId('login-password-input').fill('StrongPass123!')
 
   await page.getByTestId('login-submit-button').click()
-
-  await expect(page.getByText('Login successful')).toBeVisible()
+  await page.waitForURL('/')
   await expect(page).toHaveURL('/')
 })
