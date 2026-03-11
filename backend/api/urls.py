@@ -1,11 +1,14 @@
 from django.urls import path
 
-from api.views import SellerRegisterView
-from api.views_auth import SellerLoginView
-from api.views_car import CarCreateView
-from api.views_car_detail import BuyCarView, CarDetailView
-from api.views_car_list import CarListView
-from api.views_make import MakeListView
+from api.views import (
+    BuyCarView,
+    CarCreateView,
+    CarDetailView,
+    CarListView,
+    MakeListView,
+    SellerLoginView,
+    SellerRegisterView,
+)
 
 urlpatterns = [
     path("register/", SellerRegisterView.as_view(), name="register"),

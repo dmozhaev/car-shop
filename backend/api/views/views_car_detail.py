@@ -2,9 +2,8 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Buyer, Car
-from .serializers_buy import BuyCarSerializer
-from .serializers_car_detail import CarDetailSerializer
+from api.models import Buyer, Car
+from api.serializers import BuyCarSerializer, CarDetailSerializer
 
 
 class CarDetailView(RetrieveAPIView):

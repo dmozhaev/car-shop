@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from api.models import Car, Make, Seller
-from api.serializers_car_detail import CarDetailSerializer
+from api.serializers import CarDetailSerializer
 
 
 class CarDetailSerializerTest(TestCase):

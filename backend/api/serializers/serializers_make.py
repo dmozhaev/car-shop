@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Make
+from api.models import Make
 
 
 class MakeSerializer(serializers.ModelSerializer):

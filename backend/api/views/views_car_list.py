@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
 
-from .models import Car
-from .serializers_car_list import CarListSerializer
+from api.models import Car
+from api.serializers import CarListSerializer
 
 
 class CarListView(ListAPIView):

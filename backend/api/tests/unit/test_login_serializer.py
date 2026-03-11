@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from api.models import Seller
-from api.serializers_auth import SellerLoginSerializer
+from api.serializers import SellerLoginSerializer
 
 
 class SellerLoginSerializerTest(TestCase):

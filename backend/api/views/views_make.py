@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
 
-from .models import Make
-from .serializers_make import MakeSerializer
+from api.models import Make
+from api.serializers import MakeSerializer
 
 
 class MakeListView(ListAPIView):
