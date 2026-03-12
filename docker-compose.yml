@@ -1,18 +1,50 @@
 version: "3.9"
 
 services:
+
   db:
     image: postgres:16
     container_name: carshop_db
     restart: always
     environment:
-      POSTGRES_DB: carshop
-      POSTGRES_USER: carshop
-      POSTGRES_PASSWORD: carshop
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: carshop_backend
+    depends_on:
+      - db
+    env_file:
+      - .env.docker
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    profiles:
+      - full
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py seed_db &&
+             python manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: carshop_frontend
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    profiles:
+      - full
 
 volumes:
   postgres_data:
