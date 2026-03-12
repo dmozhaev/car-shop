@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: carshop_db
+    restart: always
+    environment:
+      POSTGRES_DB: carshop
+      POSTGRES_USER: carshop
+      POSTGRES_PASSWORD: carshop
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
