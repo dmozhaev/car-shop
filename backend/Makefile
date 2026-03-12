@@ -36,3 +36,7 @@ check:
 
 test:
 	python manage.py test
+
+setup:
+	python manage.py migrate
+	python manage.py seed_db
