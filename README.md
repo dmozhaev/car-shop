@@ -67,9 +67,16 @@ Install:
 - **Docker**
 - **Docker Compose**
 
-#### 1️⃣ Start everything
+#### 1️⃣ Clone the repository
+
 ```sh
-docker compose up --build
+git clone https://github.com/dmozhaev/car-shop.git
+cd car-shop
+```
+
+#### 2️⃣ Start everything
+```sh
+docker-compose up --build
 ```
 Services started:
 
@@ -113,7 +120,7 @@ cd car-shop
 If you want only database in Docker:
 
 ```sh
-docker compose -f docker-compose.db.yml up -d
+docker-compose -f docker-compose.db.yml up -d
 ```
 
 PostgreSQL will run on:
