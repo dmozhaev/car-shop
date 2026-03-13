@@ -76,7 +76,7 @@ cd car-shop
 
 #### 2️⃣ Start everything
 ```sh
-docker-compose up --build
+docker-compose --profile full up
 ```
 Services started:
 
@@ -120,7 +120,7 @@ cd car-shop
 If you want only database in Docker:
 
 ```sh
-docker-compose -f docker-compose.db.yml up -d
+docker-compose up db
 ```
 
 PostgreSQL will run on:
